@@ -14,16 +14,14 @@ To start the game again, the function start-over can be used.
 
 Example, where the user has choosen the number 41.
 ```
-   > (guess-my-number)
-   50
-   > (smaller)
-   25
-   > (bigger)
-   37
-   > (bigger)
-   43
-   > (smaller)
-   40
-   > (bigger)
-   41
+[1]> (guess-my-number)
+50
+[2]> (smaller)
+26
+[3]> (bigger)
+38
+[4]> (bigger)
+44
+[5]> (smaller)
+41
 ```
