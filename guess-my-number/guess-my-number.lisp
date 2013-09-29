@@ -13,5 +13,6 @@
    (guess-my-number))
 
 (defun start-over ()
-
-   )
+   (setf *lower-limit* 1)
+   (setf *upper-limit* 100)
+   (guess-my-number))
