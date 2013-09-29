@@ -5,12 +5,13 @@
    (ash (+ *upper-limit* *lower-limit*) -1))
 
 (defun bigger ()
-   (setf *lower-limit* (1- (guess-my-number))
+   (setf *lower-limit* (1- (guess-my-number)))
    (guess-my-number))
 
 (defun smaller ()
-   (setf *upper-limit* (1+ (guess-my-number))
+   (setf *upper-limit* (1+ (guess-my-number)))
    (guess-my-number))
 
 (defun start-over ()
+
    )
