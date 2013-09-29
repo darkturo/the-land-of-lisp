@@ -2,4 +2,4 @@
 (defparameter *lower-lmit* 1)
 
 (defun guess-my-number ()
-   (ash (+ upper-limit lower-limit)))
+   (ash (+ *upper-limit* *lower-limit*)))
