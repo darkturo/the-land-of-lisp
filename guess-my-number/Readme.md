@@ -13,6 +13,7 @@ smaller, using the corresponding functions, until the number is found.
 To start the game again, the function start-over can be used.
 
 Example, where the user has choosen the number 41.
+```
    > (guess-my-number)
    50
    > (smaller)
@@ -25,3 +26,4 @@ Example, where the user has choosen the number 41.
    40
    > (bigger)
    41
+```
