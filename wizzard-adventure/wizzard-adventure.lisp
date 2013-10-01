@@ -33,5 +33,5 @@
 (defun objects-at (location objects objects-location)
    (labels 
          ((at-loc-p (obj)
-            (eq (cadr (assoc obj objects-location)) loc)))
+            (eq (cadr (assoc obj objects-location)) location)))
          (remove-if-not #'at-loc-p objects)))
