@@ -4,4 +4,5 @@
       (garden (You are in a beatiful garden. There is a well in front of you))
       (attic (You are in the attic. There is a gigant welding torch in the corner.))))
 
-
+(defun describe-location (location nodes)
+   (cadr (assoc location nodes)))
