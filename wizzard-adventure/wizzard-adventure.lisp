@@ -20,7 +20,10 @@
       (chain garden)
       (forg garden)))
 
-;; functions for the game
+;; variable to track the current location
+(defparameter *location* 'living-room) 
+
+;; functions to support the logic of the game
 (defun describe-location (location nodes)
    (cadr (assoc location nodes)))
 
@@ -41,3 +44,9 @@
          ((describe-obj (obj)
             `(you see a ,obj on the floor.)))
          (apply #'append (mapcar #'describe-obj (objects-at location objects objects-location)))))
+
+;; the game
+(defun look ()
+   (append (describe-location *location* *nodes*)
+           (describe-paths *location* *edges*)
+           (describe-objects *location* *objects* *object-locations*)))
