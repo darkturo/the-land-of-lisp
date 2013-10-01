@@ -10,6 +10,16 @@
       (garden (living-room east door))
       (attic (living-room downstairs ladder))))
 
+;; objects available in the scenario, and their location
+(defparameter *objects* '(
+      whiskey bucket frog chain))
+
+(defparameter *object-locations* '(
+      (whiskey living-room)
+      (bucket living-room)
+      (chain garden)
+      (forg garden)))
+
 ;; functions for the game
 (defun describe-location (location nodes)
    (cadr (assoc location nodes)))
@@ -19,3 +29,9 @@
 
 (defun describe-paths (location edges)
    (apply #'append (mapcar #'describe-path (cdr (assoc location edges)))))
+
+(defun objects-at (location objects objects-location)
+   (labels 
+         ((at-loc-p (obj)
+            (eq (cadr (assoc obj objects-location)) loc)))
+         (remove-if-not #'at-loc-p objects)))
