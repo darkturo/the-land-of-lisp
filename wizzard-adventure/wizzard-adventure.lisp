@@ -59,3 +59,9 @@
          (progn (setf *location* (car next))
                (look))
          '(you cannot go that way.))))
+
+(defun pickup (object)
+   (cond ((member object (objects-at *location* *objects* *object-locations*))
+            (push (list object 'body) *object-locations*)
+            `(you are now carriying the ,object))
+            (t '(you cannot get that))))
