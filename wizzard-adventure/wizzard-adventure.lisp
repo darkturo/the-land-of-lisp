@@ -65,3 +65,6 @@
             (push (list object 'body) *object-locations*)
             `(you are now carriying the ,object))
             (t '(you cannot get that))))
+
+(defun inventory ()
+   (cons 'items- (objects-at 'body *objects* *object-locations*)))
