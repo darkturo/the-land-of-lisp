@@ -53,7 +53,10 @@
 
 ;; making the interface a little bit nicer to the user
 (defun game-read ()
-   (read-from-string (concatenate 'string "(" (read-line) ")")))
+   (let ((cmd (read-from-string (concatenate 'string "(" (read-line) ")"))))
+      (flet ((quote-it (x)
+                  (list 'quote x)))
+         (cons (car cmd) (mapcar #'quote-it (cdr cmd))))))
 
 (defun game-eval (what)
    (eval what))
