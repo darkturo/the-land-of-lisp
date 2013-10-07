@@ -33,7 +33,12 @@
                             (pickup (take an object from the ground))
                             (inventory (shows what the player have in its pocket))))
 
+;; game prompt
+(defparameter *game-prompt* "wizzard-adventure > ")
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; functions to support the logic of the game
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (defun describe-location (location nodes)
    (cadr (assoc location nodes)))
 
@@ -89,11 +94,12 @@
          
 
 (defun game-repl ()
-   (let ((cmd (game-read)))
-      (unless (eq (car cmd) 'quit)
-         (game-print (game-eval cmd))
-         (game-repl))))   
-
+   (progn (princ *game-prompt*)
+          (let ((cmd (game-read)))
+             (unless (eq (car cmd) 'quit)
+                (game-print (game-eval cmd))
+                (game-repl)))))
+       
 ;; the game
 (defun help ()
    (mapcan #'game-print 
