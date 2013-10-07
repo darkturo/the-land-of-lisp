@@ -1,5 +1,5 @@
 (defun say-hello ()
-   (print "Please type your name: ")
+   (princ "Please type your name: ")
    (let ((name (read)))
-      (print "Nice to meet you, ")
-      (print name)))
+      (princ "Nice to meet you, ")
+      (princ name)))
