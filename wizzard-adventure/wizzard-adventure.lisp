@@ -23,9 +23,6 @@
 ;; variable to track the current location
 (defparameter *location* 'living-room) 
 
-;; available commands 
-(defparameter *cmds* '(help look walk pickup))
-
 ;; help text
 (defparameter *help-text* '((help (prints this message))
                             (look (tell the player where he is in the scenario))
@@ -54,7 +51,13 @@
             `(you see a ,obj on the floor.)))
          (apply #'append (mapcar #'describe-obj (objects-at location objects objects-location)))))
 
+;; making the interface a little bit nicer to the user
+(defun game-repl ()
+   (progn (princ #\newline)
+          (loop (print (eval (read))))))
+
 ;; the game
+(defparameter *cmds* '(help look walk pickup inventory))
 (defun help ()
    (mapcar (lambda (l) (assoc l *help-text*)) *cmds*))
 
@@ -80,3 +83,6 @@
 
 (defun inventory ()
    (cons 'items- (objects-at 'body *objects* *object-locations*)))
+
+;; start game
+(game-repl)
