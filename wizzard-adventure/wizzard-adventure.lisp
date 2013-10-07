@@ -52,9 +52,20 @@
          (apply #'append (mapcar #'describe-obj (objects-at location objects objects-location)))))
 
 ;; making the interface a little bit nicer to the user
+(defun game-read ()
+   (read))
+
+(defun game-eval (what)
+   (eval what))
+
+(defun game-print (what)
+   (print what))
+
 (defun game-repl ()
-   (progn (princ #\newline)
-          (loop (print (eval (read))))))
+   (let ((cmd (game-read)))
+      (unless (eq (car cmd) 'quit)
+         (game-print (game-eval cmd))
+         (game-repl))))   
 
 ;; the game
 (defparameter *cmds* '(help look walk pickup inventory))
@@ -85,4 +96,5 @@
    (cons 'items- (objects-at 'body *objects* *object-locations*)))
 
 ;; start game
+(print "To start the game type '(game-repl)'") 
 (game-repl)
