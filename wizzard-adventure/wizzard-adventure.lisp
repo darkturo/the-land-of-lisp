@@ -53,7 +53,7 @@
 
 ;; making the interface a little bit nicer to the user
 (defun game-read ()
-   (read))
+   (read-from-string (concatenate 'string "(" (read-line) ")")))
 
 (defun game-eval (what)
    (eval what))
@@ -96,5 +96,5 @@
    (cons 'items- (objects-at 'body *objects* *object-locations*)))
 
 ;; start game
-(print "To start the game type '(game-repl)'") 
-(game-repl)
+;(print "To start the game type '(game-repl)'") 
+;(game-repl)
