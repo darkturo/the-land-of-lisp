@@ -66,8 +66,10 @@
        (eval sexp)
       '(i do not know that command.))) 
 
-(defun game-print (what)
-   (print what))
+(defun game-print (lst)
+   (print
+   (string-trim "() " (prin1-to-string lst)))
+   )
 
 (defun game-repl ()
    (let ((cmd (game-read)))
