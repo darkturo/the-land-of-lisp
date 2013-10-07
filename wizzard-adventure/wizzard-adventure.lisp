@@ -30,7 +30,8 @@
 (defparameter *help-text* '((help (prints this message))
                             (look (tell the player where he is in the scenario))
                             (walk (walk into the specified direction))
-                            (pickup (take an object from the ground))))
+                            (pickup (take an object from the ground))
+                            (inventory (shows what the player have in its pocket))))
 
 ;; functions to support the logic of the game
 (defun describe-location (location nodes)
@@ -95,7 +96,10 @@
 
 ;; the game
 (defun help ()
-   (mapcar (lambda (l) (assoc l *help-text*)) *allowed-commands*))
+   (mapcan #'game-print 
+         (mapcar (lambda (cmd) 
+                     (cons cmd (cons '- (cadr (assoc cmd *help-text*)))))
+                 *allowed-commands*)))
 
 (defun look ()
    (append (describe-location *location* *nodes*)
