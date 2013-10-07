@@ -23,6 +23,15 @@
 ;; variable to track the current location
 (defparameter *location* 'living-room) 
 
+;; available commands 
+(defparameter *cmds* '(help look walk pickup))
+
+;; help text
+(defparameter *help-text* '((help (prints this message))
+                            (look (tell the player where he is in the scenario))
+                            (walk (walk into the specified direction))
+                            (pickup (take an object from the ground))))
+
 ;; functions to support the logic of the game
 (defun describe-location (location nodes)
    (cadr (assoc location nodes)))
@@ -46,6 +55,9 @@
          (apply #'append (mapcar #'describe-obj (objects-at location objects objects-location)))))
 
 ;; the game
+(defun help ()
+   (mapcar (lambda (l) (assoc l *help-text*)) *cmds*))
+
 (defun look ()
    (append (describe-location *location* *nodes*)
            (describe-paths *location* *edges*)
