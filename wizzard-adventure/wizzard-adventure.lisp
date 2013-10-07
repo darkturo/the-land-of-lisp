@@ -23,6 +23,9 @@
 ;; variable to track the current location
 (defparameter *location* 'living-room) 
 
+;; allowed commands
+(defparameter *allowed-commands* '(help look walk pickup inventory))
+
 ;; help text
 (defparameter *help-text* '((help (prints this message))
                             (look (tell the player where he is in the scenario))
@@ -58,8 +61,10 @@
                   (list 'quote x)))
          (cons (car cmd) (mapcar #'quote-it (cdr cmd))))))
 
-(defun game-eval (what)
-   (eval what))
+(defun game-eval (sexp)
+   (if (member (car sexp) *allowed-commands*)
+       (eval sexp)
+      '(i do not know that command.))) 
 
 (defun game-print (what)
    (print what))
@@ -71,9 +76,8 @@
          (game-repl))))   
 
 ;; the game
-(defparameter *cmds* '(help look walk pickup inventory))
 (defun help ()
-   (mapcar (lambda (l) (assoc l *help-text*)) *cmds*))
+   (mapcar (lambda (l) (assoc l *help-text*)) *allowed-commands*))
 
 (defun look ()
    (append (describe-location *location* *nodes*)
