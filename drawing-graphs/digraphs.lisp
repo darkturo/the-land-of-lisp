@@ -5,6 +5,7 @@
 (defun dot-name (exp)
    (substitute-if #\_ (complement #'alphanumericp) (prin1-to-string exp)))
 
+; crop a long text into a shorter one
 (defun dot-label (exp)
    (if exp
       (let ((s (write-to-string exp :pretty nil)))
@@ -13,3 +14,13 @@
             s))
       ""))
 
+; this function talks in dot language. It represents nodes, for instance:
+;    living_room [label="living room, there is a wizzard sleeping here"];
+(defun nodes->dot (nodes)
+   (mapc (lambda (node)
+            (fresh-line)
+            (princ (dot-name (car node)))
+            (princ "[label=\"")
+            (princ (dot-label node))
+            (princ "\"];"))
+         nodes))
