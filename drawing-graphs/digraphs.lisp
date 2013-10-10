@@ -25,6 +25,7 @@
             (princ "\"];"))
          nodes))
 
+; draw the edges
 (defun edges->dot (edges)
    (mapc (lambda (node)
             (mapc (lambda (edge)
@@ -38,4 +39,9 @@
                   (cdr node)))
          edges))
                
-   
+; generate the dot data
+(defun graph->dot (nodes edges)
+   (princ "digraph {")
+   (nodes->dot nodes)
+   (edges->dot edges)
+   (princ "}"))   
