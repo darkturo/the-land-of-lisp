@@ -54,8 +54,7 @@
                       :direction :output
                       :if-exists :supersede)
           (funcall thunk))
-      (ext:shell (concatenate 'string "dot -T png -O " dotfile)))
-   t)
+      (eq (ext:shell (concatenate 'string "dot -T png -O " dotfile)) nil)))
 
 ; replace function
 (defun remove-png-ext (the-string)
