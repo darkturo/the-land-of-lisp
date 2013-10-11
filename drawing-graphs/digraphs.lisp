@@ -55,3 +55,9 @@
          (funcall thunk))
    (ext:shell (concatenate 'string "dot -T png -O " fname))
    t)
+
+; generate a png from a graph
+(defun graph->png (fname nodes edges)
+   (dot->png fname
+               (lambda ()
+                  (graph->dot nodes edges))))
