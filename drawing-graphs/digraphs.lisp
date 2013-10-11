@@ -53,8 +53,7 @@
                      :direction :output
                      :if-exists :supersede)
          (funcall thunk))
-   (ext:shell (concatenate 'string "dot -T png -O " fname))
-   t)
+   (eq (ext:shell (concatenate 'string "dot -T png -O " fname)) nil))
 
 ; generate a png from a graph
 (defun graph->png (fname nodes edges)
