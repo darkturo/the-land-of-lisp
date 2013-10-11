@@ -49,7 +49,7 @@
 ; generate a png file from the nodes and edges
 (defun dot->png (fname thunk)
    (with-open-file (*standard-output*
-                     fname
+                     (concatenate 'string fname ".dot")
                      :direction :output
                      :if-exists :supersede)
          (funcall thunk))
@@ -57,7 +57,7 @@
    t)
 
 ; generate a png from a graph
-(defun graph->png (fname nodes edges)
-   (dot->png fname
+(defun graph->png (fname-prefix nodes edges)
+   (dot->png fname-prefix 
                (lambda ()
                   (graph->dot nodes edges))))
