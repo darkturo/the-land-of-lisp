@@ -48,16 +48,23 @@
 
 ; generate a png file from the nodes and edges
 (defun dot->png (fname thunk)
-   (with-open-file (*standard-output*
-                     (concatenate 'string fname ".dot")
-                     :direction :output
-                     :if-exists :supersede)
-         (funcall thunk))
-   (ext:shell (concatenate 'string "dot -T png -O " fname))
+   (let ((dotfile (concatenate 'string fname ".dot")))
+      (with-open-file (*standard-output*
+                      dotfile
+                      :direction :output
+                      :if-exists :supersede)
+          (funcall thunk))
+      (ext:shell (concatenate 'string "dot -T png -O " dotfile)))
    t)
 
+; replace function
+(defun remove-png-ext (the-string)
+   (let ((l (length the-string)))
+      (when (search ".png" the-string :start2 (- l 4))
+         (subseq the-string 0 (- l 4)))))
+
 ; generate a png from a graph
-(defun graph->png (fname-prefix nodes edges)
-   (dot->png fname-prefix 
+(defun graph->png (fname nodes edges)
+   (dot->png (remove-png-ext fname) 
                (lambda ()
                   (graph->dot nodes edges))))
