@@ -46,7 +46,7 @@
                         (unless (assoc (car edge) (cdr lst))
                            (fresh-line)
                            (princ (dot-name (caar lst)))
-                           (princ "->")
+                           (princ "--")
                            (princ (dot-name (car edge)))
                            (princ "[label=\"")
                            (princ (dot-label (cdr edge)))
