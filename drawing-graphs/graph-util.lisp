@@ -82,8 +82,10 @@
 ; replace function
 (defun remove-ext (ext the-string)
    (let ((size-excluding-ext (- (length the-string) (length ext))))
-      (if (search ext the-string :start2 size-excluding-ext)
-         (subseq the-string 0 size-excluding-ext)
+      (if (> (length the-string) (length ext))
+         (if (search ext the-string :start2 size-excluding-ext)
+            (subseq the-string 0 size-excluding-ext)
+            the-string)
          the-string)))
 
 ; generate a png from a directed graph
