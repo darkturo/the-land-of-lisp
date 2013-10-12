@@ -61,6 +61,7 @@
    (edges->dot edges)
    (princ "}"))   
 
+; generate the dot data (undirected graphs)
 (defun ugraph->dot (nodes edges)
    (princ "digraph {")
    (nodes->dot nodes)
@@ -80,14 +81,21 @@
 ; replace function
 (defun remove-png-ext (the-string)
    (let ((l (length the-string)))
-      (when (search ".png" the-string :start2 (- l 4))
-         (subseq the-string 0 (- l 4)))))
+      (if (search ".png" the-string :start2 (- l 4))
+         (subseq the-string 0 (- l 4))
+         the-string)))
 
-; generate a png from a graph
+; generate a png from a directed graph
 (defun graph->png (fname nodes edges)
    (dot->png (remove-png-ext fname) 
                (lambda ()
                   (graph->dot nodes edges))))
+
+; generate the png for an undirected graph
+(defun ugraph->png (fname nodes edges)
+   (dot->png (remove-png-ext fname)
+               (lambda ()
+                  (ugraph->dot nodes edges))))
 
 ;;;; Some data for the examples ;;;;
 ;; description of the world
