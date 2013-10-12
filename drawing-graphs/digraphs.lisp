@@ -70,30 +70,31 @@
 
 ; generate a png file from the nodes and edges
 (defun dot->png (fname thunk)
-   (let ((dotfile (concatenate 'string fname ".dot")))
+   (let ((dotfile (concatenate 'string fname ".dot"))
+         (pngfile (concatenate 'string fname ".png")))
       (with-open-file (*standard-output*
                       dotfile
                       :direction :output
                       :if-exists :supersede)
           (funcall thunk))
-      (eq (ext:shell (concatenate 'string "dot -T png -O " dotfile)) nil)))
+      (eq (ext:shell (concatenate 'string "dot -T png -o " pngfile " " dotfile)) nil)))
 
 ; replace function
-(defun remove-png-ext (the-string)
-   (let ((l (length the-string)))
-      (if (search ".png" the-string :start2 (- l 4))
-         (subseq the-string 0 (- l 4))
+(defun remove-ext (ext the-string)
+   (let ((size-excluding-ext (- (length the-string) (length ext))))
+      (if (search ext the-string :start2 size-excluding-ext)
+         (subseq the-string 0 size-excluding-ext)
          the-string)))
 
 ; generate a png from a directed graph
 (defun graph->png (fname nodes edges)
-   (dot->png (remove-png-ext fname) 
+   (dot->png (remove-ext ".dot" (remove-ext ".png" fname))
                (lambda ()
                   (graph->dot nodes edges))))
 
 ; generate the png for an undirected graph
 (defun ugraph->png (fname nodes edges)
-   (dot->png (remove-png-ext fname)
+   (dot->png (remove-ext ".dot" (remove-ext ".png" fname))
                (lambda ()
                   (ugraph->dot nodes edges))))
 
