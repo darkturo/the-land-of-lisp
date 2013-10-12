@@ -61,6 +61,12 @@
    (edges->dot edges)
    (princ "}"))   
 
+(defun ugraph->dot (nodes edges)
+   (princ "digraph {")
+   (nodes->dot nodes)
+   (unedges->dot edges)
+   (princ "}"))   
+
 ; generate a png file from the nodes and edges
 (defun dot->png (fname thunk)
    (let ((dotfile (concatenate 'string fname ".dot")))
@@ -83,7 +89,7 @@
                (lambda ()
                   (graph->dot nodes edges))))
 
-;;;; Some data for the examples
+;;;; Some data for the examples ;;;;
 ;; description of the world
 (defparameter *wizzard-nodes* '(
       (living-room (You are in the living-room. A wizzard is snoring loudly on the couch.))
