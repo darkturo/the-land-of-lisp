@@ -82,3 +82,16 @@
    (dot->png (remove-png-ext fname) 
                (lambda ()
                   (graph->dot nodes edges))))
+
+;;;; Some data for the examples
+;; description of the world
+(defparameter *wizzard-nodes* '(
+      (living-room (You are in the living-room. A wizzard is snoring loudly on the couch.))
+      (garden (You are in a beatiful garden. There is a well in front of you))
+      (attic (You are in the attic. There is a gigant welding torch in the corner.))))
+
+;; edges (definition of the paths available between locations
+(defparameter *wizzard-edges* '(
+      (living-room (garden west door) (attic upstairs ladder))
+      (garden (living-room east door))
+      (attic (living-room downstairs ladder))))
