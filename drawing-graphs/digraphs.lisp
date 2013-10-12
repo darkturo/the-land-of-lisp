@@ -41,7 +41,7 @@
 
 ; draw the edges (undirected graph)
 (defun unedges->dot (edges)
-   maplist (lambda (lst)
+   (maplist (lambda (lst)
                (mapc (lambda (edge)
                         (unless (assoc (car edge) (cdr lst))
                            (fresh-line)
@@ -51,7 +51,7 @@
                            (princ "[label=\"")
                            (princ (dot-label (cdr edge)))
                            (princ "\"];")))
-                     (cdar lst))
+                     (cdar lst)))
             edges))
                
 ; generate the dot data
