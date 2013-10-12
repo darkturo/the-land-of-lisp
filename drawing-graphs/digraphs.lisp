@@ -25,7 +25,7 @@
             (princ "\"];"))
          nodes))
 
-; draw the edges
+; draw the edges (directed graph)
 (defun edges->dot (edges)
    (mapc (lambda (node)
             (mapc (lambda (edge)
@@ -38,6 +38,21 @@
                      (princ "\"];"))
                   (cdr node)))
          edges))
+
+; draw the edges (undirected graph)
+(defun unedges->dot (edges)
+   maplist (lambda (lst)
+               (mapc (lambda (edge)
+                        (unless (assoc (car edge) (cdr lst))
+                           (fresh-line)
+                           (princ (dot-name (caar lst)))
+                           (princ "->")
+                           (princ (dot-name (car edge)))
+                           (princ "[label=\"")
+                           (princ (dot-label (cdr edge)))
+                           (princ "\"];")))
+                     (cdar lst))
+            edges))
                
 ; generate the dot data
 (defun graph->dot (nodes edges)
