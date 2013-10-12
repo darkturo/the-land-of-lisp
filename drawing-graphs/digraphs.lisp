@@ -63,7 +63,7 @@
 
 ; generate the dot data (undirected graphs)
 (defun ugraph->dot (nodes edges)
-   (princ "digraph {")
+   (princ "graph {")
    (nodes->dot nodes)
    (unedges->dot edges)
    (princ "}"))   
