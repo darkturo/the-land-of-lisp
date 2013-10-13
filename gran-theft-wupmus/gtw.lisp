@@ -8,3 +8,5 @@
 (defparameter *worm-num* 3)
 (defparameter *cops-odds* 15)
 
+(defun random-node ()
+  (+ 1 (random *node-num*)))
