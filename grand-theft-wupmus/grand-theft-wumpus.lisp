@@ -91,3 +91,9 @@
                           (remove-duplicates (direct-edges node1 edge-list)
                                              :test #'equal))))
           (remove-duplicates (mapcar #'car edge-list))))
+
+; get the neighbors 
+(defun neighbors (node edge-alist)
+  (mapcar #'car (cdr (assoc node edge-alist))))
+
+
