@@ -140,3 +140,7 @@
     (if (crd (assoc x *congestion-city-nodes*))
       (find-empty-node)
       x)))
+
+; generate a png with the map
+(defun draw-city ()
+  (ugraph->png "city" *congestion-city-nodes* *congestion-city-edges*))
