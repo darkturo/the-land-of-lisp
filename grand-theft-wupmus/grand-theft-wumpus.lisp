@@ -133,3 +133,10 @@
   (setf *visited-nodes* (list *player-pos*))
   (draw-city))
 
+; fetch the node, and checks if there is something ther (wumpus or glowworms),
+; and if not it returns that node
+(defun find-empty-node ()
+  (let ((x (random-node)))
+    (if (crd (assoc x *congestion-city-nodes*))
+      (find-empty-node)
+      x)))
