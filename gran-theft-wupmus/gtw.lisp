@@ -49,12 +49,21 @@
          (find-island nodes))
       islands))
 
-; I lost the track here ... I'm in monkey typing state :-S
+; it will trace the islands with bridges
 (defun connect-with-bridges (islands)
   (when (cdr islands)
     (append (edge-pair (caar islands) (caadr islands)) 
             (connect-with-bridges (cdr islands)))))
 
-; it will connect-all-islands all the islands found with find-islands
+; it will connect-all-islands found with find-islands
 (defun connect-all-islands (nodes edge-list)
   (append (connect-with-bridges (find-islands nodes edge-list)) edge-list))
+
+(defun make-city-edges ()
+  (let* ((nodes (loop for i from 1 to *node-num* collect i)) 
+         (edege-list (connect-all-islands nodes (make-edge-list)))
+         (cops (remove-if-not (lambda (x)
+                                (zerop (random *cops-odds*)))
+                              edge-list
+                              )))
+      (add-cops (edge-to-alist edge-list) cops)))
