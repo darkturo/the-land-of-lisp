@@ -92,8 +92,10 @@
                                              :test #'equal))))
           (remove-duplicates (mapcar #'car edge-list))))
 
-; get the neighbors 
+; get the neighbors of a given node
 (defun neighbors (node edge-alist)
   (mapcar #'car (cdr (assoc node edge-alist))))
 
-
+; hmmm, it seems that this function does the same as the preivous ... 
+(defun within-one (a b edge-alist)
+  (member b (neighbors a edge-alist)))
