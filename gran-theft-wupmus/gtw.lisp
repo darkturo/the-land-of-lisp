@@ -67,3 +67,19 @@
                               edge-list
                               )))
       (add-cops (edge-to-alist edge-list) cops)))
+
+(defun add-cops (edge-alist edges-with-cops)
+   (mapcar (lambda (x)
+               (let ((node1 (car x))
+                     (node1-edges (cdr x)))
+                 (cons node1
+                       (mapcar (lambda (edge)
+                                 (let ((node2 (car edge)))
+                                   (if (interesection (edge-pair node1 node2) 
+                                                      edges-with-cops
+                                                      :test #'equal)
+                                     (list node2 'cops)
+                                     edge)))
+                               node1-edges))))
+           edge-alist))
+                                                               
