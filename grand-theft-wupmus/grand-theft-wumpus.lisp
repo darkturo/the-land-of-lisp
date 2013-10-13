@@ -41,7 +41,7 @@
 (defun find-islands (nodes edge-list)
   (let ((islands nil))
     (labels ((find-island (nodes)
-               (let* ((connected (get-connected (car nodes edge-list))) 
+               (let* ((connected (get-connected (car nodes) edge-list)) 
                       (unconnected (set-difference nodes connected)))
                  (push connected islands)
                  (when unconnected
@@ -61,7 +61,7 @@
 
 (defun make-city-edges ()
   (let* ((nodes (loop for i from 1 to *node-num* collect i)) 
-         (edege-list (connect-all-islands nodes (make-edge-list)))
+         (edge-list (connect-all-islands nodes (make-edge-list)))
          (cops (remove-if-not (lambda (x)
                                 (zerop (random *cops-odds*)))
                               edge-list
