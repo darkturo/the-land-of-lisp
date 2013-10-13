@@ -96,6 +96,13 @@
 (defun neighbors (node edge-alist)
   (mapcar #'car (cdr (assoc node edge-alist))))
 
-; hmmm, it seems that this function does the same as the preivous ... 
+; gets the neighbors for a, and check if b is in that list. 
+; It will return nil if not.
 (defun within-one (a b edge-alist)
   (member b (neighbors a edge-alist)))
+
+; checks if b is in any of the edges within two nodes
+(defun within-two (a b edge-list)
+  (or (within-one a b edge-list)
+      (some (lambda (x) (within-one x b edge-alist))
+            (neighbors a edge-alist))))
