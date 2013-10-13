@@ -75,7 +75,7 @@
                  (cons node1
                        (mapcar (lambda (edge)
                                  (let ((node2 (car edge)))
-                                   (if (interesection (edge-pair node1 node2) 
+                                   (if (intersection (edge-pair node1 node2) 
                                                       edges-with-cops
                                                       :test #'equal)
                                      (list node2 'cops)
@@ -102,8 +102,8 @@
   (member b (neighbors a edge-alist)))
 
 ; checks if b is in any of the edges within two nodes
-(defun within-two (a b edge-list)
-  (or (within-one a b edge-list)
+(defun within-two (a b edge-alist)
+  (or (within-one a b edge-alist)
       (some (lambda (x) (within-one x b edge-alist))
             (neighbors a edge-alist))))
 
@@ -137,7 +137,7 @@
 ; and if not it returns that node
 (defun find-empty-node ()
   (let ((x (random-node)))
-    (if (crd (assoc x *congestion-city-nodes*))
+    (if (cdr (assoc x *congestion-city-nodes*))
       (find-empty-node)
       x)))
 
